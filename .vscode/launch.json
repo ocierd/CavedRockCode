@@ -1,0 +1,91 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (API)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CavedRockCode.Api/bin/Debug/net5.0/CavedRockCode.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CavedRockCode.Api",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Launch (App)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildApp",
+            "program": "${workspaceFolder}/CavedRockCode.App/bin/Debug/net5.0/CavedRockCode.App.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CavedRockCode.App",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Launch (Worker)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildOrderProcessor",
+            "program": "${workspaceFolder}/CavedRockCode.OrderProcessor/bin/Debug/net5.0/CavedRockCode.OrderProcessor.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CavedRockCode.OrderProcessor",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+        {
+            "name": "Docker .NET Core Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/CavedRockCode.Api/CavedRockCode.Api.csproj"
+            }
+        },
+        {
+            "name": "Docker .NET Core Attach (Preview)",
+            "type": "docker",
+            "request": "attach",
+            "platform": "netCore",
+            "sourceFileMap": {
+                "/src": "${workspaceFolder}"
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Compound",
+            "configurations": [
+                ".NET Core Launch (API)",
+                ".NET Core Launch (App)",
+                ".NET Core Launch (Worker)"
+            ],
+            // "preLaunchTask": "${defaultBuildTask}"
+        }
+    ]
+}

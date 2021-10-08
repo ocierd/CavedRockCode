@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CavedRockCode.App.Models.Product>;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+
+
+    @foreach (var product in Model)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        @product.Id (@product.Name)
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <a href="#" class="btn btn-primary">@product.Price</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,50 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:34035",
+      "sslPort": 44389
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "CavedRockCode.App": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:6001;http://localhost:6000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "DockerBackup": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "SimpleProperty": "hi-from-launchSettings",
+        "Inventory__NestedProperty": "this-does-not-seem-possible"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "useSSL": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "applicationUrl": "https://localhost:8090;http://localhost:8091",
+      "ASPNETCORE_URLS": "https://+:8090;http://+:8091",
+      "environmentVariables": {
+        "Inventory__NestedProperty": "this-does-not-seem-possible",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

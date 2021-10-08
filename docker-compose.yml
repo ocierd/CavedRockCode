@@ -1,0 +1,48 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+version: '3.4'
+
+services:
+  cavedrockcode-api:
+    # image: cavedrockcodeapi
+    image: ocierd.azurecr.io/cavedrockcode-api
+    build:
+      context: .
+      dockerfile: CavedRockCode.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SimpleProperty="hello-from-CODE-compose"
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      - seq-in-dc
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+
+  cavedrockcode-app:
+    # image: cavedrockecodeapp
+    image: ocierd.azurecr.io/cavedrockcode-app
+    build:
+      context: .
+      dockerfile: CavedRockCode.App/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CarvedRockApiUrl=http://cavedrockcode-api:8080/api/
+      - ASPNETCORE_URLS=http://+:8081
+    depends_on:
+      - seq-in-dc
+      - cavedrockcode-api
+
+  seq-in-dc:
+    image: datalust/seq
+    ports:
+      - "8005:8005"
+    environment:
+      - ACCEPT_EULA=Y
+
+  rabbit-in-dc:
+    image: rabbitmq:3-management
+    ports:
+      - "8088:15672"
