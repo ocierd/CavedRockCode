@@ -20,7 +20,7 @@ namespace CavedRockCode.Api
             
             try
             {
-                Log.Information("Starting web host");
+                Log.Information("Starting web API host");
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
