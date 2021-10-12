@@ -46,6 +46,7 @@ services:
     depends_on:
       - seq-in-dc
       - rabbit-in-dc
+      - sql-in-dc
 
 
   seq-in-dc:
@@ -59,3 +60,14 @@ services:
     image: rabbitmq:3-management
     ports:
       - "8088:15672"
+
+  sql-in-dc:
+    build:
+      context: .
+      dockerfile: SQL/Dockerfile
+    restart: always
+    ports:
+      - "1440:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=mM0704070488*

@@ -1,6 +1,6 @@
 using System;
 
-namespace CavedRockCode.Api
+namespace CavedRockCode.Api.ApiModels
 {
     public class WeatherForecast
     {

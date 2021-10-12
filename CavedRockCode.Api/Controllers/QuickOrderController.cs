@@ -25,9 +25,9 @@ namespace CavedRockCode.Api.Controllers
         }
 
         [HttpPost]
-        public Guid SubmitQuickOrder(QuickOrder quickOrder)
+        public async Task<Guid> SubmitQuickOrder(QuickOrder quickOrder)
         {
-            return QuickOrderLogic.PlaceQuickOrder(quickOrder, 12345);
+            return await QuickOrderLogic.PlaceQuickOrder(quickOrder, 12345);
         }
     }
 }

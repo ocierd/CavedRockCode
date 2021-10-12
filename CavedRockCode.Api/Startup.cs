@@ -1,6 +1,9 @@
+using System.Data;
+using System.Data.SqlClient;
 using CavedRockCode.Api.Domain;
 using CavedRockCode.Api.Integrations;
 using CavedRockCode.Api.Interfaces;
+using CavedRockCode.Api.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -25,9 +28,15 @@ namespace CavedRockCode.Api
         {
             LogConfigurationDebugView();
             LogSettingsConfiguration();
+
             services.AddScoped<IProductLogic, ProductLogic>();
             services.AddScoped<IQuickOrderLogic, QuickOrderLogic>();
             services.AddSingleton<IOrderProcessingNotification, OrderProcessingNotification>();
+
+
+            string connectionString = Configuration.GetConnectionString("Db");
+            services.AddScoped<IDbConnection>(ServiceProvider => new SqlConnection(connectionString));
+            services.AddScoped<ICavedRepository, CavedRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

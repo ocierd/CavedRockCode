@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using CavedRockCode.OrderProcessor.Repository;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -36,8 +40,12 @@ namespace CavedRockCode.OrderProcessor
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    string connectionString = hostContext.Configuration.GetConnectionString("Db");
+                    services.AddSingleton<IDbConnection>(ServiceProvider => new SqlConnection(connectionString));
+                    services.AddSingleton<IInventoryRepository, InventoryRepository>();
                     services.AddHostedService<Worker>();
-                });
+                })
+                .UseSerilog();
 
         private static void ConfigureLogging()
         {
