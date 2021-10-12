@@ -41,14 +41,17 @@ namespace CavedRockCode.OrderProcessor
 
         private static void ConfigureLogging()
         {
+            string serilogUrl = "http://seq-in-dc:5341";
+#if DEBUG
+            serilogUrl = "http://host.docker.internal:5341";
+#endif
             string name = typeof(Program).Assembly.GetName().Name;
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .Enrich.WithProperty("MachineName", Environment.MachineName)
                 .Enrich.WithProperty("assembly", name)
-                //.WriteTo.Seq("http://host.docker.internal:5341")
-                .WriteTo.Seq("http://seq-in-dc:5341")
+                .WriteTo.Seq(serilogUrl)
                 .WriteTo.Console()
                 .CreateLogger();
         }
